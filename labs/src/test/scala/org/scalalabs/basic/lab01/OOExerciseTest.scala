@@ -5,6 +5,7 @@ import org.junit.runner.RunWith
 import org.specs2.mutable.Specification
 import org.specs2.runner.JUnitRunner
 
+
 @RunWith(classOf[JUnitRunner])
 class OOExerciseTest extends Specification {
 
@@ -90,13 +91,13 @@ class OOExerciseTest extends Specification {
   }
   "Exercise 5: Implicit parameter" should {
     "make currency converter plugable" in {
-      skipped("Uncomment and fix me")
-      //      implicit object anotherConverter extends DefaultCurrencyConverter {
-      //        override val conversionRate = 1.2
-      //      }
-      //      val e: Euro = new Dollar(1, 5)
-      //      e.euro ==== 1
-      //      e.cents ==== 26
+      // skipped("Uncomment and fix me")
+      implicit object anotherConverter extends DefaultCurrencyConverter {
+        override val conversionRate = 1.2
+      }
+      val e: Euro = new Dollar(1, 5)
+      e.euro ==== 1
+      e.cents ==== 26
     }
   }
 }

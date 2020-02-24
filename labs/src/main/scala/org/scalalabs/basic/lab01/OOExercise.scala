@@ -2,8 +2,6 @@ package org.scalalabs.basic.lab01
 
 import scala.language.implicitConversions
 
-import DefaultCurrencyConverter._
-
 /**
  * The goal of this exercise is to get familiar basic OO constructs in scala
  *
@@ -87,8 +85,10 @@ object Euro {
     def *(euro: Euro) = { euro * factor }
   }
 
-  implicit def dollarToEuro(dollar: Dollar): Euro = {
-    val totalEuroCents: Int = toEuroCents(dollar.inCents)
+  implicit def dollarToEuro(dollar: Dollar)(
+    implicit
+    converter: CurrencyConverter = DefaultCurrencyConverter): Euro = {
+    val totalEuroCents: Int = converter.toEuroCents(dollar.inCents)
     new Euro({ totalEuroCents / 100 }, { totalEuroCents % 100 })
   }
 }
