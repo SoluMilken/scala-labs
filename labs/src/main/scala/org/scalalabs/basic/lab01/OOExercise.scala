@@ -1,5 +1,8 @@
 package org.scalalabs.basic.lab01
+
 import scala.language.implicitConversions
+import java.lang.IllegalArgumentException
+
 /**
  * The goal of this exercise is to get familiar basic OO constructs in scala
  *
@@ -40,6 +43,62 @@ import scala.language.implicitConversions
  *   of type [[org.scalalabs.basic.lab01.CurrencyConverter]]
  * - Use the implicit CurrencyConverter to do the conversion.
  */
-class Euro {
 
+class Euro(var euro: Int, var cents: Int = 0) extends Currency("EUR") with Ordered[Euro] {
+  val inCents: Int = { euro * 100 + cents }
+
+  def +(that: Euro): Euro = {
+    val total_cents: Int = { this.inCents + that.inCents }
+    new Euro({ total_cents / 100 }, { total_cents % 100 })
+  }
+
+  def *(factor: Int): Euro = {
+    val total_cents: Int = { this.inCents * factor }
+    new Euro({ total_cents / 100 }, { total_cents % 100 })
+  }
+
+  override def toString: String = {
+    if (cents != 0) {
+      "%s: %d,%02d".format(symbol, euro, cents)
+    } else {
+      "%s: %d,--".format(symbol, euro)
+    }
+  }
+
+  def /(divider: Int) = {
+    if (divider <= 0) {
+      throw new IllegalArgumentException
+    } else {
+      val resultInCents: Int = { inCents / divider }
+      new Euro({ resultInCents / 100 }, { resultInCents % 100 })
+    }
+  }
+
+  def compare(that: Euro): Int = { this.inCents - that.inCents }
+
+}
+
+abstract class Currency(val symbol: String) {
+  def toString(): String
+}
+
+class Dollar(var dollar: Int, var dollarCents: Int = 0) {
+  val inCents: Int = { dollar * 100 + dollarCents }
+}
+
+object Euro {
+  def fromCents(cents: Int): Euro = {
+    new Euro({ cents / 100 }, { cents % 100 })
+  }
+
+  implicit class EuroMultiply(factor: Int) {
+    def *(euro: Euro) = { euro * factor }
+  }
+
+  implicit def dollarToEuro(dollar: Dollar)(
+    implicit
+    converter: CurrencyConverter = DefaultCurrencyConverter): Euro = {
+    val totalEuroCents: Int = converter.toEuroCents(dollar.inCents)
+    new Euro({ totalEuroCents / 100 }, { totalEuroCents % 100 })
+  }
 }
