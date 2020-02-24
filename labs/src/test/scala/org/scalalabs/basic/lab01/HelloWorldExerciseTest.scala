@@ -32,23 +32,6 @@ class HelloWorldExerciseTest extends Specification {
       "Echo" === HelloWorld.echo("Echo")
     }
   }
-  /*==============================================================*/
-
-  /*
-  * Scala inheritence with Traits
-  *
-  * Your job is to implement the objects and classes in
-  * such a way that the tests in this suite all succeed.
-  *
-  * Hint:
-  * - combine the methods in HelloTrait and Worldtrait to
-  *   create a new message
-  */
-  "Scala Traits" should {
-    "say hello" in {
-      "Hello World" === HelloWorldWithTraits.hello
-    }
-  }
 
   /*==============================================================*/
 
@@ -67,6 +50,24 @@ class HelloWorldExerciseTest extends Specification {
     "serve as factory" in {
       val helloWorldInstance = HelloWorldClassAndObject("Hello")
       "Hello" === helloWorldInstance.echo
+    }
+  }
+
+  /*==============================================================*/
+
+  /*
+  * Scala inheritence with Traits
+  *
+  * Your job is to implement the objects and classes in
+  * such a way that the tests in this suite all succeed.
+  *
+  * Hint:
+  * - combine the methods in HelloTrait and Worldtrait to
+  *   create a new message
+  */
+  "Scala Traits" should {
+    "say hello" in {
+      "Hello World" === HelloWorldWithTraits.hello
     }
   }
 

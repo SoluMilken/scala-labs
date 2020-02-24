@@ -74,14 +74,11 @@ object HelloWorld {
  */
 object HelloWorldClassAndObject {
   def apply(initialText: String): HelloWorldClassAndObject = {
-    new HelloWorldClassAndObject {
-      val text = "FixMe"
-    }
+    new HelloWorldClassAndObject(initialText)
   }
 }
 
-abstract class HelloWorldClassAndObject {
-  val text: String
+class HelloWorldClassAndObject(text: String) {
   def echo: String = text
 }
 
