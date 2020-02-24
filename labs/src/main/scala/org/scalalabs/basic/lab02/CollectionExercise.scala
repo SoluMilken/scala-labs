@@ -80,7 +80,16 @@ object CollectionExercise01 {
 
 object CollectionExercise02 {
 
-  class Person(val age: Int, val name: String)
+  class Person(val age: Int, val name: String) extends Ordered[Person] {
+
+    def compare(that: Person): Int = {
+        if (this.name == that.name) { 0 }
+        else if (this.name < that.name) { 1 }
+        else { -1 }
+    }
+
+    override def toString: String = {s"$name: $age"}
+  }
 
   /**
    * Take a look at the java class: {@link ImperativeSample}. The
@@ -90,7 +99,24 @@ object CollectionExercise02 {
    * using a functional approach.
    */
   def groupAdultsPerAgeGroup(persons: Seq[Person]): Map[Int, Seq[Person]] = {
-    error("fix me")
+    var ageGroup: Map[Int, Seq[Person]] = Map()
+    for (person <- persons) {
+      if (person.age > 18) {
+        var category: Int = (person.age / 10) * 10
+        if (ageGroup.contains(category)) {
+          var oldPersons: Seq[Person] = ageGroup(category)
+          ageGroup = ageGroup - category
+          ageGroup += (category -> {oldPersons :+ person} )
+        } else {
+          ageGroup += (category -> List(person))
+        }
+      }
+    }
+    var sortedAgeGroup: Map[Int, Seq[Person]] = Map()
+    for ((age, persons) <- ageGroup) {
+      sortedAgeGroup += (age -> persons.sorted)
+    }
+    sortedAgeGroup
   }
 }
 
