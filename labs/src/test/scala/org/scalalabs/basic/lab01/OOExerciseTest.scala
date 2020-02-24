@@ -75,17 +75,17 @@ class OOExerciseTest extends Specification {
   "Exercise 4: Implicit class" should {
     //implicit val defaultConverter = DefaultCurrencyConverter
     "add *(euro:Euro) (multiply) method to Int" in {
-      skipped("Uncomment and fix me")
-      //      import Euro._
-      //      val res = 3 * new Euro(2, 50)
-      //      res.euro ==== 7
-      //      res.cents ==== 50
+      // skipped("Uncomment and fix me")
+      import Euro._
+      val res = 3 * new Euro(2, 50)
+      res.euro ==== 7
+      res.cents ==== 50
     }
     "implicitly convert from euro to dollar" in {
-      skipped("Uncomment and fix me")
-      //      val e: Euro = new Dollar(1, 5)
-      //      e.euro ==== 1
-      //      e.cents ==== 42
+      // skipped("Uncomment and fix me")
+      val e: Euro = new Dollar(1, 5)
+      e.euro ==== 1
+      e.cents ==== 42
     }
   }
   "Exercise 5: Implicit parameter" should {
