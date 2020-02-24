@@ -1,6 +1,7 @@
 package org.scalalabs.basic.lab01
 
 import scala.language.implicitConversions
+import java.lang.IllegalArgumentException
 
 /**
  * The goal of this exercise is to get familiar basic OO constructs in scala
@@ -61,6 +62,15 @@ class Euro(var euro: Int, var cents: Int = 0) extends Currency("EUR") with Order
       "%s: %d,%02d".format(symbol, euro, cents)
     } else {
       "%s: %d,--".format(symbol, euro)
+    }
+  }
+
+  def /(divider: Int) = {
+    if (divider <= 0) {
+      throw new IllegalArgumentException
+    } else {
+      val resultInCents: Int = { inCents / divider }
+      new Euro({ resultInCents / 100 }, { resultInCents % 100 })
     }
   }
 
