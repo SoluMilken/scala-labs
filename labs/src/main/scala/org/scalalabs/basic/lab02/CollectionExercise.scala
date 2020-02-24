@@ -33,9 +33,49 @@ object CollectionExercise01 {
    *
    */
   def googleCodeJamGooglerese(lines: String*): Seq[String] = {
-    error("fix me")
+    val codeBook = Map(
+      'f' -> 'c',
+      't' -> 'w',
+      'k' -> 'i',
+      'e' -> 'o',
+      'j' -> 'u',
+      's' -> 'n',
+      'u' -> 'j',
+      'm' -> 'l',
+      'd' -> 's',
+      'p' -> 'r',
+      'i' -> 'd',
+      'x' -> 'm',
+      'a' -> 'y',
+      'y' -> 'a',
+      'l' -> 'g',
+      'n' -> 'b',
+      'c' -> 'e',
+      'g' -> 'v',
+      'o' -> 'k',
+      'h' -> 'x',
+      'r' -> 't',
+      'b' -> 'h',
+      'v' -> 'p',
+      'w' -> 'f',
+    )
+    var output = List[String]()
+    for (i <- 0 to (lines.length - 1)) {
+      var line = lines(i)
+      var outputString: String = ""
+      for (char <- line) {
+        if (char != ' ') {
+          outputString = outputString + codeBook(char)
+        } else {
+          outputString = outputString + " "
+        }
+      }
+      output = output :+ outputString
+    }
+    output
   }
 }
+
 /*========================================================== */
 
 object CollectionExercise02 {
