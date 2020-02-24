@@ -91,11 +91,11 @@ object HelloWorldWithTraits extends HelloTrait with WorldTrait {
    * - combine the 'helloMethod' of HelloTrait and the 'worldMethod' of WorldTrait to create a new message
    * - just replacing the FixMe string would of course be cheating :)
    */
-  def hello: String = "FixMe"
+  def hello: String = "%s %s".format(helloMethod, worldMethod)
 }
 
 trait HelloTrait {
-  def helloMethod: String = "FixMe"
+  def helloMethod: String = "Hello"
 }
 
 trait WorldTrait {
