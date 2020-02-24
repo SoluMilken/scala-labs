@@ -1,5 +1,7 @@
 package org.scalalabs.basic.lab01
+
 import scala.language.implicitConversions
+
 /**
  * The goal of this exercise is to get familiar basic OO constructs in scala
  *
@@ -40,6 +42,28 @@ import scala.language.implicitConversions
  *   of type [[org.scalalabs.basic.lab01.CurrencyConverter]]
  * - Use the implicit CurrencyConverter to do the conversion.
  */
-class Euro {
+class Euro(var euro: Int, var cents: Int = 0) {
+  val inCents: Int = { euro * 100 + cents }
 
+  def +(that: Euro): Euro = {
+    val total_cents: Int = { this.inCents + that.inCents }
+    val output_euro: Int = total_cents / 100
+    val output_cents: Int = total_cents % 100
+    new Euro(output_euro, output_cents)
+  }
+
+  def *(that: Int): Euro = {
+    val total_cents: Int = { this.inCents * that }
+    val output_euro: Int = total_cents / 100
+    val output_cents: Int = total_cents % 100
+    new Euro(output_euro, output_cents)
+  }
+}
+
+object Euro {
+  def fromCents(cents: Int): Euro = {
+    val output_euro: Int = cents / 100
+    val output_cents: Int = cents % 100
+    new Euro(output_euro, output_cents)
+  }
 }
