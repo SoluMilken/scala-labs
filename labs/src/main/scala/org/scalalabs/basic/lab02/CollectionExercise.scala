@@ -178,16 +178,49 @@ object CollectionExercise05 {
    * E.g. Seq(1,2,3) is Seq(2)
    */
   def filterWithFoldLeft(seq: Seq[Int]): Seq[Int] = {
-    error("fix me")
+    seq.foldLeft(List[Int]()) {
+      (result, currentElement) => if (
+        currentElement % 2 == 0) result :+ currentElement else result
+    }
   }
-
   /**
    * Group all numbers based on whether they are even or odd using foldLeft.
    * For even use 'true' for odd use 'false'.
    * E.g: Seq(1,2,3) is Map(true -> Seq(2), false -> Seq(1,3))
    */
   def groupByWithFoldLeft(seq: Seq[Int]): Map[Boolean, Seq[Int]] = {
-    error("fix me")
+    seq.foldLeft(Map[Boolean, List[Int]]()) {
+      (result, currentElement) => op(result, currentElement)
+    }
+  }
+
+  def op(result: Map[Boolean, List[Int]], currentElement: Int):  Map[Boolean, List[Int]] = {
+    var output: Map[Boolean, List[Int]] = result
+    if (currentElement % 2 == 0) {
+      if (result.contains(true)) {
+        output = update(result, true, currentElement)
+      } else {
+        output += (true -> List(currentElement))
+      }
+    } else {
+      if (result.contains(false)) {
+        output = update(result, false, currentElement)
+      } else {
+        output += (false -> List(currentElement))
+      }
+    }
+    output
+  }
+  def update(
+      result: Map[Boolean, List[Int]],
+      key: Boolean,
+      newElement: Int,
+    ): Map[Boolean, List[Int]] = {
+    var output: Map[Boolean, List[Int]] = result
+    var oldElements: List[Int] = result(key)
+    output = output - key
+    output += (key -> { oldElements :+ newElement })
+    output
   }
 }
 
