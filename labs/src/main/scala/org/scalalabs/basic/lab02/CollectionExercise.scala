@@ -153,7 +153,20 @@ object CollectionExercise04 {
    * To keep it simple it's ok to use String.split to extract all words of a sentence.
    */
   def calcLengthLongestWord(lines: String*): Int = {
-    error("fix me")
+    var maxLength: Int = -1
+    var tokenLen: Int = 0
+    var tokens = new Array[String](1000)
+
+    for (line <- lines){
+      tokens = line.split(" ")
+      for (token <- tokens) {
+        tokenLen = token.length
+        if (tokenLen > maxLength){
+          maxLength = tokenLen
+        }
+      }
+    }
+    maxLength
   }
 }
 
