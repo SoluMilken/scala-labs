@@ -46,6 +46,8 @@ class CollectionExerciseTest extends Specification {
       CollectionExercise03.checkValuesIncrease(Seq(1)) ==== true
       CollectionExercise03.checkValuesIncrease(Seq(1, 2, 100)) ==== true
       CollectionExercise03.checkValuesIncrease(Seq(1, 2, 1)) ==== false
+      CollectionExercise03.checkValuesIncrease(Seq(3, 2, 1)) ==== false // extra test cases
+      CollectionExercise03.checkValuesIncrease(Seq(1, 2, 2)) ==== false // extra test cases
     }
   }
 

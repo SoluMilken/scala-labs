@@ -84,8 +84,8 @@ object CollectionExercise02 {
 
     def compare(that: Person): Int = {
         if (this.name == that.name) { 0 }
-        else if (this.name < that.name) { 1 }
-        else { -1 }
+        else if (this.name < that.name) { -1 }
+        else { 1 }
     }
 
     override def toString: String = {s"$name: $age"}
@@ -130,10 +130,21 @@ object CollectionExercise03 {
    * checkValuesIncrease(Seq(1,2,3)) == true
    * checkValuesIncrease(Seq(1,2,2)) == false
    */
-  def checkValuesIncrease[T](seq: Seq[T])(implicit ev: T => Ordered[T]): Boolean =
-    error("fix me")
+  def checkValuesIncrease[T](seq: Seq[T])(implicit ev: T => Ordered[T]): Boolean = {
+    if (seq.length == 0) { return true }
 
+    var prevElement = seq(0)
+    for (i <- 1 to (seq.length - 1)){
+      var currentElement = seq(i)
+      if (prevElement >= currentElement){
+        return false
+      }
+      prevElement = currentElement
+    }
+    true
+  }
 }
+
 /*========================================================== */
 
 object CollectionExercise04 {
